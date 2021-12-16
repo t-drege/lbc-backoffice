@@ -23,7 +23,7 @@
           </a>
           </div>
         </td>
-        <td v-for="object in data">{{ object }}</td>
+        <td v-for="(object,index) in data" v-if="!exclude.includes(index)">{{ object }}</td>
         <td>
           <div class="d-flex d-inline-flex mr-3" v-for="iconButton in iconButtons">
             <component :is="iconButton.component" v-bind="iconButton.props"/>

@@ -34,12 +34,8 @@ export default {
     modalValidationButton: String,
     modalCancelButton: String,
     modalColorValidation: String,
-    modalColorCancel: String
-  },
-  data(){
-    return {
-      rights: true
-    }
+    modalColorCancel: String,
+    rights: Boolean
   },
   mounted() {
     this.getRigths()

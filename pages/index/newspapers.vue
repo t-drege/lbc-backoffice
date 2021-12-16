@@ -3,9 +3,14 @@
     <SubHeaderButtons :buttons="buttons"/>
     <div class="container-fluid mt-4">
       <div class="row justify-content-start">
-        <div class="col-auto mb-3">
+          <ImageCard :element-id="1" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
           <ImageCard :element-id="2" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
-        </div>
+          <ImageCard :element-id="3" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
+          <ImageCard :element-id="4" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
+          <ImageCard :element-id="5" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
+          <ImageCard :element-id="6" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
+          <ImageCard :element-id="9" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
+          <ImageCard :element-id="10" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
       </div>
     </div>
   </div>
@@ -50,9 +55,18 @@ export default {
       this.iconButtons.push({
           component: IconButtonModal,
           props: {
+            modalId: 'modal-read-railway',
+            icon: 'train',
+            color: 'text-secondary',
+            rights: true
+          }
+        },{
+          component: IconButtonModal,
+          props: {
             modalId: 'modal-delete-newspaper',
             icon: 'pen',
-            color: 'text-secondary'
+            color: 'text-secondary',
+            rights: true
           }
         },
         {
@@ -60,7 +74,8 @@ export default {
           props: {
             modalId: 'modal-edit-newspaper',
             icon: 'trash',
-            color: 'text-danger'
+            color: 'text-danger',
+            rights: true
           }
         })
     }

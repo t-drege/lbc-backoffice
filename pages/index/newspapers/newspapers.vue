@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <SubHeaderButtons :buttons="buttons"/>
     <div class="container-fluid mt-4">
-      <div class="row justify-content-start ml-5">
+      <div class="row justify-content-center">
           <ImageCard :element-id="1" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
           <ImageCard :element-id="2" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
           <ImageCard :element-id="3" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
@@ -21,7 +21,8 @@ import SubHeaderButtons from "@/components/SubHeader/SubHeaderButtons";
 import ButtonCallModal from "@/components/Button/ButtonCallModal";
 import IconButtonModal from "~/components/Icon/IconButtonModal";
 import Create from "@/components/Modal/Newspaper/Create";
-import ImageCard from "../../components/Image/ImageCard";
+import ImageCard from "../../../components/Image/ImageCard";
+import IconLink from "../../../components/Icon/IconLink";
 
 export default {
   name: "theme",
@@ -53,12 +54,12 @@ export default {
     },
     getIconButtons: function () {
       this.iconButtons.push({
-          component: IconButtonModal,
+          component: IconLink,
           props: {
-            modalId: 'modal-read-railway',
             icon: 'train',
             color: 'text-secondary',
-            rights: true
+            rights: true,
+            url:'/newspapers/:id/railways'
           }
         },{
           component: IconButtonModal,

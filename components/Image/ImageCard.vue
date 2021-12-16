@@ -13,7 +13,8 @@
                        :is="iconButton.component"
                        v-bind="iconButton.props"
                        :modalId="iconButton.props.modalId+'-'+elementId"
-                       :element-id="elementId"/>
+                       :element-id="elementId"
+                       :parameters="{'id': elementId}"/>
           </div>
         </div>
         </div>

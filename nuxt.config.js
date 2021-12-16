@@ -13,7 +13,7 @@ export default {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/lbc-icon.ico'}
-    ]
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -57,6 +57,11 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
   ],
+
+  bootstrapVue: {
+    icons: true,
+    tooltip:true
+  },
 
   router : {
     middleware: []

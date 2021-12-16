@@ -5,10 +5,9 @@
       <h5 class="card-title">{{title}}</h5>
       <p class="card-text">{{description}}</p>
       <div class="d-flex justify-content-end p-2">
-        <font-awesome-icon :icon="'train'"/>
-        <font-awesome-icon :icon="'trash'" class="ml-3"/>
-        <font-awesome-icon :icon="'upload'" class="ml-3"/>
-        <font-awesome-icon :icon="'pen'" class="ml-3"/>
+        <div v-for="iconButton in iconButtons">
+          <component class="mr-3" :is="iconButton.component" v-bind="iconButton.props" :element-id="elementId"/>
+        </div>
       </div>
     </div>
   </div>
@@ -18,9 +17,11 @@
   export default {
     name: "ImageCard",
     props: {
+      elementId: Number,
       title: String,
       description: String,
-      imageUrl:String
+      imageUrl:String,
+      iconButtons: Array
     }
   }
 </script>

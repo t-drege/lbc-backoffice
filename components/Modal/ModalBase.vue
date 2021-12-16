@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal
-      id="modal-component"
+      :id="id"
       :size="'lg'"
       :centered="true"
       :button-size="'lg'"
@@ -13,7 +13,7 @@
         <footer class="modal-footer mt-3">
           <b-button size="lg"
                     :variant="(colorCancel != null) ? colorCancel : 'secondary'"
-                    @click="$bvModal.hide('modal-component')">
+                    @click="$bvModal.hide(id)">
             {{ titleCancel }}
           </b-button>
           <b-button type="submit"
@@ -31,8 +31,10 @@
   export default {
     name: "ModalBase",
     props: {
+      id: String,
+      elementId:Number,
       headerTitle: String,
-      component: String,
+      component: Object,
       titleValidation: String,
       titleCancel: String,
       colorValidation: String,

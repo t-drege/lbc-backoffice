@@ -20,7 +20,8 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -42,8 +43,8 @@ export default {
     families: {
       // a simple name
       Corinthia: true,
-      Roboto:true,
-      Lobster:true,
+      Roboto: true,
+      Lobster: true,
 
       // a name with spaces
       'Josefin+Sans': true,
@@ -60,10 +61,10 @@ export default {
 
   bootstrapVue: {
     icons: true,
-    tooltip:true
+    tooltip: true
   },
 
-  router : {
+  router: {
     middleware: []
   },
 

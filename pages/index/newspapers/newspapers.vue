@@ -59,7 +59,7 @@ export default {
             icon: 'train',
             color: 'text-secondary',
             rights: true,
-            url:'/newspapers/:id/railways'
+            url:'/journaux/:id/chemin-de-fer'
           }
         },{
           component: IconButtonModal,

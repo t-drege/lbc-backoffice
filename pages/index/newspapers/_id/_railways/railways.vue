@@ -33,7 +33,7 @@
       getHeaders: function () {
         this.headers = ['titile', 'test', 'super']
         this.datas = [{
-          "id": 'thomas',
+          "idfd": 'thomas',
           "username": 'td',
           'sf': 'sfq'
         }, {

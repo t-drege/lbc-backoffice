@@ -16,7 +16,7 @@
                class="bg-white">
 
       <tr v-for="(data, index) in datas" v-bind:key="index">
-        <td>
+        <td v-if="draggable">
           <div class="col-sm-1 drag ml-3" v-if="draggable"><a
             href="javascript:">
             <font-awesome-icon icon="bars" class="mx-auto"/>

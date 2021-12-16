@@ -6,7 +6,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
         <p class="card-text">{{ description }}</p>
-        <footer>
+        <div class="card-footer p-0 bg-white">
         <div class="d-flex p-2">
           <div v-for="iconButton in iconButtons">
             <component class="mr-3"
@@ -16,7 +16,7 @@
                        :element-id="elementId"/>
           </div>
         </div>
-        </footer>
+        </div>
       </div>
     </div>
   </div>

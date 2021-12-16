@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <SubHeaderButtons :buttons="buttons"/>
     <div class="container-fluid mt-4">
-      <div class="row justify-content-start">
+      <div class="row justify-content-start ml-5">
           <ImageCard :element-id="1" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
           <ImageCard :element-id="2" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>
           <ImageCard :element-id="3" :title="'LBC 35'" :description="'Bernanos'" :icon-buttons="iconButtons"/>

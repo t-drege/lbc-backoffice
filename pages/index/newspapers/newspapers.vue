@@ -3,10 +3,14 @@
     <SubHeaderButtons :buttons="buttons"/>
     <div class="container-fluid mt-4">
       <div class="row justify-content-center">
-        <ImageCard :element-id="1" :title="'LBC 35'"
+        <ImageCard :element-id="1"
+                   :title="'LBC 35'"
                    :description="'Bernanos'"
+                   :date="'09 octobre 2021'"
                    :icon-buttons="iconButtons"
                    :elements-right="elementsRight"/>
+
+        {{superd}}
       </div>
     </div>
   </div>
@@ -20,6 +24,7 @@
   import ImageCard from "@/components/Image/ImageCard";
   import IconLink from "@/components/Icon/IconLink";
   import TextInfo from "@/components/Text/TextInfo";
+  import Stripe from 'stripe'
 
   export default {
     name: "theme",
@@ -28,13 +33,22 @@
       return {
         buttons: [],
         iconButtons: [],
-        elementsRight: []
+        elementsRight: [],
+        superd: null
       }
     },
-    mounted() {
+    async mounted() {
       this.getSubButtons();
       this.getIconButtons();
       this.getElementsRight()
+
+      let test = Stripe('sk_test_51K7i47HZFFc2ZvHL5Dou7qdJMLZJnAqNy6Bf8QkuTveOOP7G6zGMZJ2iw03Kaiw43OXh563YV408QdB5j8fjqROb00oXJwufyB');
+      let ok = await test.products.list()
+      ok.then(function (tt) {
+        console.log(tt)
+      })
+    },
+    async created() {
     },
     methods: {
       getSubButtons: function () {
@@ -98,10 +112,16 @@
                 'color': 'text-danger'
               }
             ],*/
-            color:'text-danger',
+            color: 'text-danger',
             rights: true,
           }
         })
+      },
+      getProducts: async function (test) {
+        this.stripe = await test.products.list().then(function (ok) {
+          resolve(ok)
+        })
+        console.log(this.stripe)
       }
     }
   }

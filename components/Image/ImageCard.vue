@@ -6,6 +6,9 @@
       <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
         <p class="card-text">{{ description }}</p>
+        <div class="d-flex justify-content-end text-secondary">
+          <small>{{date}}</small>
+        </div>
         <div class="container-fluid card-footer p-0 bg-white">
           <div class="row">
             <div class="d-flex col-sm-auto ml-1 mt-2">
@@ -42,6 +45,7 @@
       elementId: Number,
       title: String,
       description: String,
+      date: String,
       imageUrl: String,
       iconButtons: Array,
       elementsRight: Array,

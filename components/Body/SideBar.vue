@@ -36,6 +36,7 @@
           {category: 'Articles', path: "/articles", icon: 'feather-alt'},
           {category: 'Produits', path: "/produits", icon: 'cart-arrow-down'},
           {category: 'Propositions', path: "/propositions", icon: 'box-open'},
+          {category: 'Medias', path: "/medias", icon: 'photo-video'},
           {category: 'Utilisateurs', path: "/utilisateurs", icon: 'users'},
         ]
       }

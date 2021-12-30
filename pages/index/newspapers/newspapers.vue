@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid">
     <SubHeaderButtons :buttons="buttons"/>
+    <div id="paypal-button-container"></div>
     <div class="container-fluid mt-4">
       <div class="row justify-content-center">
         <ImageCard :element-id="1"
@@ -24,7 +25,6 @@
   import ImageCard from "@/components/Image/ImageCard";
   import IconLink from "@/components/Icon/IconLink";
   import TextInfo from "@/components/Text/TextInfo";
-  import Stripe from 'stripe'
 
   export default {
     name: "theme",
@@ -42,13 +42,31 @@
       this.getIconButtons();
       this.getElementsRight()
 
-      let test = Stripe('sk_test_51K7i47HZFFc2ZvHL5Dou7qdJMLZJnAqNy6Bf8QkuTveOOP7G6zGMZJ2iw03Kaiw43OXh563YV408QdB5j8fjqROb00oXJwufyB');
-      let ok = await test.products.list()
-      ok.then(function (tt) {
-        console.log(tt)
-      })
+      /* let test = Stripe('sk_test_51K7i47HZFFc2ZvHL5Dou7qdJMLZJnAqNy6Bf8QkuTveOOP7G6zGMZJ2iw03Kaiw43OXh563YV408QdB5j8fjqROb00oXJwufyB');
+       let ok = await test.products.list()
+       ok.then(function (tt) {
+         console.log(tt)
+       })*/
+
     },
     async created() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'subscribe'
+        },
+        createSubscription: function (data, actions) {
+          return actions.subscription.create({
+            /* Creates the subscription */
+            plan_id: 'P-2YV00302MJ5884901MHBQTNA'
+          });
+        },
+        onApprove: function (data, actions) {
+          alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+      }).render('#paypal-button-container'); // Renders the PayPal button
     },
     methods: {
       getSubButtons: function () {

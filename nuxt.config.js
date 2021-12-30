@@ -14,6 +14,9 @@ export default {
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/lbc-icon.ico'}
     ],
+    script: [
+      {src : "https://www.paypal.com/sdk/js?client-id=AXc9bFu6DT80zQE-tuwjPS9U93F81ut0lZQIgNyhxcy52qSynu-ZT1bnTslnllYolzuMHIsVeN7qh5cq&vault=true"}
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

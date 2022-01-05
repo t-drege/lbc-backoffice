@@ -40,6 +40,9 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-image": "^31.1.0"
+    "@ckeditor/ckeditor5-autosave": "^31.1.0",
+    "@ckeditor/ckeditor5-html-support": "^31.1.0",
+    "@ckeditor/ckeditor5-image": "^31.1.0",
+    "@ckeditor/ckeditor5-upload": "^31.1.0"
   }
 }

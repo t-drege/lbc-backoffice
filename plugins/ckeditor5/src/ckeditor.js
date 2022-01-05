@@ -25,65 +25,206 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js'
+import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar.js'
+import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption.js'
+import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle.js'
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize.js'
+import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload.js'
+import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert.js'
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter'
+import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport'
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
 
-class Editor extends ClassicEditor {}
+class Editor extends ClassicEditor {
+}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
-	Alignment,
-	Autoformat,
-	BlockQuote,
-	Bold,
-	Essentials,
-	FontBackgroundColor,
-	FontColor,
-	FontFamily,
-	FontSize,
-	Heading,
-	Indent,
-	Italic,
-	Link,
-	List,
-	MediaEmbed,
-	Paragraph,
-	PasteFromOffice,
-	SourceEditing,
-	TextTransformation,
-	Underline,
-	WordCount,
-  Image
+  Alignment,
+  Autoformat,
+  BlockQuote,
+  Bold,
+  Essentials,
+  FontBackgroundColor,
+  FontColor,
+  FontFamily,
+  FontSize,
+  Heading,
+  Indent,
+  Italic,
+  Link,
+  List,
+  MediaEmbed,
+  Paragraph,
+  PasteFromOffice,
+  SourceEditing,
+  TextTransformation,
+  Underline,
+  WordCount,
+  Image,
+  ImageToolbar,
+  ImageCaption,
+  ImageStyle,
+  ImageResize,
+  ImageUpload,
+  ImageInsert,
+  GeneralHtmlSupport,
+  SimpleUploadAdapter,
+  Autosave
 ];
 
 // Editor configuration.
 Editor.defaultConfig = {
-	toolbar: {
-		items: [
-			'heading',
-			'|',
-			'sourceEditing',
-			'bold',
-			'italic',
-			'fontSize',
-			'fontFamily',
-			'fontColor',
-			'fontBackgroundColor',
-			'underline',
-			'alignment',
-			'link',
-			'bulletedList',
-			'numberedList',
-			'|',
-			'outdent',
-			'indent',
-			'|',
-			'blockQuote',
-			'undo',
-			'redo',
+  fontSize: {
+    options: [
+      8, 10, 12, 14, 16, 18, 20
+    ].map(val => ({
+      model: val,
+      title: `x${val}`,
+      view: {
+        name: 'span',
+        styles: {
+          'font-size': `${val}pt`
+        }
+      }
+    })),
+  },
+  fontColor: {
+    colors: [
+      {
+        color: 'hsl(0, 0%, 0%)',
+        label: 'Black'
+      },
+      {
+        color: 'hsl(0, 0%, 30%)',
+        label: 'Dim grey'
+      },
+      {
+        color: 'hsl(0, 0%, 60%)',
+        label: 'Grey'
+      },
+      {
+        color: 'hsl(0, 0%, 90%)',
+        label: 'Light grey'
+      },
+      {
+        color: 'hsl(0, 0%, 100%)',
+        label: 'White',
+        hasBorder: true
+      },
+      {
+        color: 'rgb(35,60,132)',
+        label: 'Blue LBC'
+      },
+      {
+        color: 'rgb(231, 215, 53)',
+        label: 'Yellow AF'
+      },
+      {
+        color: 'rgb(156, 0, 6)',
+        label: 'red LBC'
+      }
+    ]
+  },
+  fontBackgroundColor: {
+    colors: [
+      {
+        color: 'hsl(0, 0%, 0%)',
+        label: 'Black'
+      },
+      {
+        color: 'hsl(0, 0%, 30%)',
+        label: 'Dim grey'
+      },
+      {
+        color: 'hsl(0, 0%, 60%)',
+        label: 'Grey'
+      },
+      {
+        color: 'hsl(0, 0%, 90%)',
+        label: 'Light grey'
+      },
+      {
+        color: 'hsl(0, 0%, 100%)',
+        label: 'White',
+        hasBorder: true
+      },
+      {
+        color: 'rgb(35,60,132)',
+        label: 'Blue LBC'
+      },
+      {
+        color: 'rgb(231, 215, 53)',
+        label: 'Yellow AF'
+      },
+      {
+        color: 'rgb(156, 0, 6)',
+        label: 'red LBC'
+      }
+    ]
+  },
+  toolbar: {
+    items: [
+      'heading',
       '|',
-      'image'
-		]
-	},
-	language: 'fr'
+      'sourceEditing',
+      'generalHtmlSupport',
+      '|',
+      'bold',
+      'italic',
+      'fontSize',
+      'fontFamily',
+      'fontColor',
+      'fontBackgroundColor',
+      'underline',
+      'alignment',
+      'link',
+      'bulletedList',
+      'numberedList',
+      '|',
+      'outdent',
+      'indent',
+      '|',
+      'blockQuote',
+      '|',
+      'imageInsert',
+      '|',
+      'undo',
+      'redo',
+    ]
+  },
+  image: {
+    toolbar: [
+      'imageStyle:alignLeft',
+      "imageStyle:alignCenter",
+      'imageStyle:alignRight',
+      'toggleImageCaption',
+      'imageTextAlternative',
+      'linkImage'
+    ]
+  },
+  htmlSupport: {
+    allow: [
+      {
+        name: /.*/,
+        attributes: true,
+        classes: true,
+        styles: true
+      }
+    ],
+    disallow: []
+  },
+  simpleUpload: {
+    name: 'image',
+    uploadUrl: 'http://localhost:3001/api/v1/articles/upload/image'
+  },
+  autosave: {
+    waitingTime: 2000,
+    save(editor) {
+      console.log(editor.getData())
+    }
+  },
+  language: 'fr'
 };
 
 export default Editor;

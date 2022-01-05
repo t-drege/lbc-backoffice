@@ -11,7 +11,8 @@
                    :icon-buttons="iconButtons"
                    :elements-right="elementsRight"/>
 
-        <div id="editor"></div>
+        <textarea id="editor"></textarea>
+
       </div>
     </div>
   </div>

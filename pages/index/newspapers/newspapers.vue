@@ -49,7 +49,13 @@ export default {
     this.getSubButtons();
     this.getIconButtons();
     this.getElementsRight()
-    await Editor.create(document.querySelector('#editor'))
+    await Editor.create(document.querySelector('#editor'), {
+      wordCount: {
+        onUpdate: stats => {
+          console.log(`Characters: ${stats.characters}`);
+        }
+      },
+    })
    // ClassicEditor.toolbar = ['sourceEditing']
 
     //console.log(ClassicEditor)

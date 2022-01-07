@@ -10,9 +10,6 @@
                    :date="'09 octobre 2021'"
                    :icon-buttons="iconButtons"
                    :elements-right="elementsRight"/>
-
-        <textarea id="editor"></textarea>
-
       </div>
     </div>
   </div>
@@ -49,26 +46,9 @@ export default {
     this.getSubButtons();
     this.getIconButtons();
     this.getElementsRight()
-    await Editor.create(document.querySelector('#editor'), {
-      wordCount: {
-        onUpdate: stats => {
-          console.log(`Characters: ${stats.characters}`);
-        }
-      },
+    this.$axios.get('/newspapers').then(function (newspapers) {
+      console.log(newspapers.data)
     })
-   // ClassicEditor.toolbar = ['sourceEditing']
-
-    //console.log(ClassicEditor)
-
-    /* let test = Stripe('sk_test_51K7i47HZFFc2ZvHL5Dou7qdJMLZJnAqNy6Bf8QkuTveOOP7G6zGMZJ2iw03Kaiw43OXh563YV408QdB5j8fjqROb00oXJwufyB');
-     let ok = await test.products.list()
-     ok.then(function (tt) {
-       console.log(tt)
-     })*/
-
-  },
-  async created() {
-
   },
   methods: {
     getSubButtons: function () {
@@ -159,3 +139,11 @@ alias: [
 ]
 }
 </router>
+
+/*await Editor.create(document.querySelector('#editor'), {
+wordCount: {
+onUpdate: stats => {
+console.log(`Characters: ${stats.characters}`);
+}
+},
+})*/

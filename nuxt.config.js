@@ -16,7 +16,6 @@ export default {
     ],
     script: [
       {src : "https://www.paypal.com/sdk/js?client-id=AXc9bFu6DT80zQE-tuwjPS9U93F81ut0lZQIgNyhxcy52qSynu-ZT1bnTslnllYolzuMHIsVeN7qh5cq&vault=true"},
-      {src: "https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"}
     ]
   },
 
@@ -60,6 +59,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios'
   ],
 
   bootstrapVue: {
@@ -76,5 +76,9 @@ export default {
 
   loaders: [
     { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
-  ]
+  ],
+
+  axios: {
+    baseURL: 'http://localhost:3001/api/v1'
+  }
 }

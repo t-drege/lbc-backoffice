@@ -11,7 +11,7 @@
         </div>
         <div class="container-fluid card-footer p-0 bg-white">
           <div class="row">
-            <div class="d-flex col-sm-auto ml-1 mt-2">
+            <div class="d-flex col-sm-7 ml-1 mt-2">
               <div v-for="iconButton in iconButtons">
                 <component class="mr-3"
                            :is="iconButton.component"
@@ -21,11 +21,13 @@
                            :parameters="{'id': elementId}"/>
               </div>
             </div>
-            <div class="d-flex col-sm-auto mr-1 mt-2">
+            <div class="d-flex ml-3 mt-2">
               <div v-for="element in elementsRight">
                 <component class="mr-3"
+                           v-bind="element.props"
                            :is="element.component"
-                           v-bind="element.props"/>
+                           :id="newspaperStatusId"
+                           :text="newspaperStatus"/>
               </div>
             </div>
           </div>
@@ -50,6 +52,8 @@
       iconButtons: Array,
       elementsRight: Array,
       rights: Boolean,
+      newspaperStatus: String,
+      newspaperStatusId: Number
     }
   }
 </script>
@@ -57,11 +61,11 @@
 <style scoped>
 
   .card-size {
-    width: 230px;
+    width: 280px;
   }
 
   .card-size-image {
-    height: 320px;
+    height: 380px;
   }
 
 </style>

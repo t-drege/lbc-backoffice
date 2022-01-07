@@ -34,7 +34,8 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/fontawesome',
     '@nuxtjs/google-fonts',
-    '@nuxtjs/router-extras'
+    '@nuxtjs/router-extras',
+    '@nuxtjs/moment'
   ],
   fontawesome: {
     icons: {
@@ -80,5 +81,9 @@ export default {
 
   axios: {
     baseURL: 'http://localhost:3001/api/v1'
+  },
+  moment: {
+    defaultLocale: 'fr',
+    locales: ['fr']
   }
 }

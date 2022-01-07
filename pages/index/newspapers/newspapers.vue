@@ -4,11 +4,14 @@
     <div id="paypal-button-container"></div>
     <div class="container-fluid mt-4">
       <div class="row justify-content-center">
-        <ImageCard :element-id="1"
-                   :title="'LBC 35'"
-                   :description="'Bernanos'"
-                   :date="'09 octobre 2021'"
+        <ImageCard v-for="newspaper in newspapers" :element-id="newspaper.id"
+                   :imageUrl="`http://localhost:3001/images/${newspaper.media.name}`"
+                   :title="`LBC ${newspaper.number}`"
+                   :description="newspaper.principalTheme"
+                   :date="(newspaper.publishedAt) ? $moment(new Date(newspaper.publishedAt).toISOString().slice(0, 19).replace('T', ' ')).format('DD MMMM YYYY') : 'date de publication à venir'"
                    :icon-buttons="iconButtons"
+                   :newspaper-status="newspaper.newspaperStatus.value"
+                   :newspaper-status-id="newspaper.newspaperStatus.id"
                    :elements-right="elementsRight"/>
       </div>
     </div>
@@ -16,115 +19,114 @@
 </template>
 
 <script>
-let Editor;
-let SourceEditing;
+  let Editor;
+  let SourceEditing;
 
-import SubHeaderButtons from "@/components/SubHeader/SubHeaderButtons";
-import ButtonCallModal from "@/components/Button/ButtonCallModal";
-import IconButtonModal from "~/components/Icon/IconButtonModal";
-import Create from "@/components/Modal/Newspaper/Create";
-import ImageCard from "@/components/Image/ImageCard";
-import IconLink from "@/components/Icon/IconLink";
-import TextInfo from "@/components/Text/TextInfo";
+  import SubHeaderButtons from "@/components/SubHeader/SubHeaderButtons";
+  import ButtonCallModal from "@/components/Button/ButtonCallModal";
+  import IconButtonModal from "~/components/Icon/IconButtonModal";
+  import Create from "@/components/Modal/Newspaper/Create";
+  import ImageCard from "@/components/Image/ImageCard";
+  import IconLink from "@/components/Icon/IconLink";
+  import TextInfo from "@/components/Text/TextInfo";
 
-if (process.browser) {
- Editor = require('@/plugins/ckeditor5/build/ckeditor')
-}
+  /*if (process.browser) {
+   Editor = require('@/plugins/ckeditor5/build/ckeditor')
+  }*/
 
-export default {
-  name: "theme",
-  components: {ImageCard, SubHeaderButtons},
-  data() {
-    return {
-      buttons: [],
-      iconButtons: [],
-      elementsRight: [],
-      superd: null,
-    }
-  },
-  async mounted() {
-    this.getSubButtons();
-    this.getIconButtons();
-    this.getElementsRight()
-    this.$axios.get('/newspapers').then(function (newspapers) {
-      console.log(newspapers.data)
-    })
-  },
-  methods: {
-    getSubButtons: function () {
-      this.buttons.push(
-        {
-          component: ButtonCallModal,
-          props: {
-            modalId: 'modal-create-newspaper',
-            title: "Ajouter Journal",
-            modalTitle: "Ajouter un journal",
-            modalTarget: Create,
-            modalCancelButton: "Annuler",
-            modalValidationButton: "Ajouter",
-          }
-        })
+  export default {
+    name: "theme",
+    components: {ImageCard, SubHeaderButtons},
+    data() {
+      return {
+        newspapers: [],
+        page: 1,
+        limit: 10,
+        buttons: [],
+        iconButtons: [],
+        elementsRight: [],
+      }
     },
-    getIconButtons: function () {
-      this.iconButtons.push({
-          component: IconLink,
-          props: {
-            icon: 'train',
-            color: 'text-secondary',
-            rights: true,
-            url: '/journaux/:id/chemin-de-fer'
-          }
-        }, {
-          component: IconButtonModal,
-          props: {
-            modalId: 'modal-delete-newspaper',
-            icon: 'pen',
-            color: 'text-secondary',
-            rights: true
-          }
-        },
-        {
-          component: IconButtonModal,
-          props: {
-            modalId: 'modal-edit-newspaper',
-            icon: 'trash',
-            color: 'text-danger',
-            rights: true
-          }
-        })
+    mounted() {
+      this.getSubButtons();
+      this.getIconButtons();
+      this.getElementsRight()
+      this.getListNewspaper()
     },
-    getElementsRight: function () {
-      this.elementsRight.push({
-        component: TextInfo,
-        props: {
-          id: 1,
-          text: 'publié',
-          hasValuesCompare: true,
-          /*valuesCompare: [
-            {
-              'id': 1,
-              'color': 'text-success'
-            }, {
-              'id': 2,
-              'color': 'text-warning'
-            }, {
-              'id': 3,
-              'color': 'text-danger'
+    methods: {
+      getListNewspaper: function () {
+        const self = this;
+        this.$axios.get(`/newspapers?page=${this.page}&limit=${this.limit}`).then(function (response) {
+          self.newspapers = response.data.rows
+        })
+      },
+      getSubButtons: function () {
+        this.buttons.push(
+          {
+            component: ButtonCallModal,
+            props: {
+              modalId: 'modal-create-newspaper',
+              title: "Ajouter Journal",
+              modalTitle: "Ajouter un journal",
+              modalTarget: Create,
+              modalCancelButton: "Annuler",
+              modalValidationButton: "Ajouter",
             }
-          ],*/
-          color: 'text-danger',
-          rights: true,
-        }
-      })
-    },
-    getProducts: async function (test) {
-      this.stripe = await test.products.list().then(function (ok) {
-        resolve(ok)
-      })
-      console.log(this.stripe)
+          })
+      },
+      getIconButtons: function () {
+        this.iconButtons.push({
+            component: IconLink,
+            props: {
+              icon: 'train',
+              color: 'text-secondary',
+              rights: true,
+              url: '/journaux/:id/chemin-de-fer'
+            }
+          }, {
+            component: IconButtonModal,
+            props: {
+              modalId: 'modal-delete-newspaper',
+              icon: 'pen',
+              color: 'text-secondary',
+              rights: true
+            }
+          },
+          {
+            component: IconButtonModal,
+            props: {
+              modalId: 'modal-edit-newspaper',
+              icon: 'trash',
+              color: 'text-danger',
+              rights: true
+            }
+          })
+      },
+      getElementsRight: function () {
+        this.elementsRight.push({
+          component: TextInfo,
+          props: {
+            text: 'publié',
+            hasValuesCompare: true,
+            valuesCompare: [
+              {
+                'id': 1,
+                'color': 'text-danger'
+              }, {
+                'id': 2,
+                'color': 'text-primary'
+              }, {
+                'id': 3,
+                'color': 'text-success'
+              }
+            ],
+            color: 'text-danger',
+            rights: true,
+          }
+        })
+      },
     }
   }
-}
 </script>
 
 <style scoped>
@@ -132,12 +134,12 @@ export default {
 </style>
 
 <router>
-{
-path: '/newspapers',
-alias: [
-'/journaux'
-]
-}
+  {
+  path: '/newspapers',
+  alias: [
+  '/journaux'
+  ]
+  }
 </router>
 
 /*await Editor.create(document.querySelector('#editor'), {

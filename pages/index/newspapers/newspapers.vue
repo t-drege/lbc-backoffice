@@ -1,11 +1,10 @@
 <template>
   <div class="container-fluid">
-    <SubHeaderButtons :buttons="buttons"/>
-    <div id="paypal-button-container"></div>
-    <div class="container-fluid mt-4">
-      <div class="row justify-content-center">
+    <SubHeaderButtons :buttonsLeft="buttonsLeft" :buttonsRight="buttonsRight"/>
+    <div class="container mt-4">
+      <div class="row justify-content-start px-5">
         <client-only>
-          <ImageCard v-for="newspaper in newspapers" :element-id="newspaper.id"
+          <ImageCard class="col-sm-auto" v-for="newspaper in newspapers" :element-id="newspaper.id"
                      :imageUrl="`${images}${newspaper.media.name}`"
                      :title="`LBC ${newspaper.number}`"
                      :description="newspaper.principalTheme"
@@ -31,6 +30,7 @@
   import IconLink from "@/components/Icon/IconLink";
   import TextInfo from "@/components/Text/TextInfo";
   import axios from "@/plugins/axios";
+  import ButtonNavigationImage from "../../../components/Button/ButtonNavigationImage";
   /*if (process.browser) {
    Editor = require('@/plugins/ckeditor5/build/ckeditor')
   }*/
@@ -42,10 +42,11 @@
         newspapers: [],
         page: 1,
         limit: 10,
-        buttons: [],
+        buttonsRight: [],
+        buttonsLeft: [],
         iconButtons: [],
         elementsRight: [],
-        images: (process.client)?process.env.URL_IMAGE:null
+        images: (process.client) ? process.env.URL_IMAGE : null
       }
     },
     mounted() {
@@ -62,7 +63,17 @@
         })
       },
       getSubButtons: function () {
-        this.buttons.push(
+        this.buttonsLeft.push({
+          component: ButtonNavigationImage,
+          props: {
+            imageUrl: 'left-arrow.svg',
+            color: 'text-secondary',
+            rights: true,
+            url: '/journaux/creer',
+            parameters: null
+          }
+        })
+        this.buttonsRight.push(
           {
             component: ButtonCallModal,
             props: {

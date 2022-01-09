@@ -1,7 +1,16 @@
 <template>
-  <div class="d-flex flex-row-reverse bd-highlight rounded-3 bg-white shadow-sm p-3">
-    <div v-for="button in buttons">
-      <component :is="button.component" v-bind="button.props"/>
+  <div class="container-fluid bd-highlight rounded-3 bg-white card p-3">
+    <div class="row px-2">
+      <div class="col-sm-6">
+        <div v-for="buttonLeft in buttonsLeft">
+          <component :is="buttonLeft.component" v-bind="buttonLeft.props"/>
+        </div>
+      </div>
+      <div class="col-sm-6 d-flex justify-content-end">
+      <div v-for="buttonRight in buttonsRight">
+        <component :is="buttonRight.component" v-bind="buttonRight.props"/>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -10,7 +19,8 @@
   export default {
     name: "SubHeaderButtons",
     props: {
-      buttons: Array
+      buttonsRight: Array,
+      buttonsLeft: Array
     },
   }
 </script>

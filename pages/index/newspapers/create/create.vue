@@ -3,7 +3,7 @@
     <SubHeaderButtons :buttonsLeft="buttonsLeft"/>
     <div class="card p-4 mt-4 ju">
       <div class="row justify-content-center">
-      <div class="title-form mb-4 w-75">Ajouter un journal</div>
+      <div class="title-form mb-4 w-75 font-weight-bold">AJOUTER UN JOURNAL</div>
       </div>
       <div class="row justify-content-center">
         <form class="w-75">
@@ -51,7 +51,7 @@ export default {
         size: 'fa-2x',
         color: 'text-secondary',
         rights: true,
-        url: '/journaux/creer',
+        url: '/journaux',
         parameters: null
       }
     })

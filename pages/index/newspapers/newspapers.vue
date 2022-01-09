@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <SubHeaderButtons :buttonsLeft="buttonsLeft" :buttonsRight="buttonsRight"/>
+    <SubHeaderButtons :buttonsRight="buttonsRight"/>
     <div class="container mt-4">
       <div class="row justify-content-start px-5">
         <client-only>

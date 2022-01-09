@@ -1,12 +1,11 @@
 <template>
   <div>
     <NuxtLink href="javascript:"
-              tag="img"
-              :src="require('@/static/'+imageUrl+'')"
-              :class="[color]"
+              :class="[color, size]"
               :disabled="this.rights !== true"
-              :style="{ opacity: this.rights ? 1 : 0.5, 'pointer-events': this.rights ? '' : 'none', width:'40px' }"
+              :style="{ opacity: this.rights ? 1 : 0.5, 'pointer-events': this.rights ? '' : 'none'}"
               :to="urlBuilded">
+      <font-awesome-icon :icon="icon"/>
     </NuxtLink>
   </div>
 </template>
@@ -19,9 +18,11 @@
     props: {
       color: String,
       rights: Boolean,
-      imageUrl: String,
+      icon: String,
       parameters: Object,
       url: String,
+      text: String,
+      size:String
     },
     data() {
       return {

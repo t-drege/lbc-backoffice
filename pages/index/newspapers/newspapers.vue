@@ -66,7 +66,8 @@
         this.buttonsLeft.push({
           component: ButtonNavigationImage,
           props: {
-            imageUrl: 'left-arrow.svg',
+            icon: 'arrow-left',
+            size:'fa-2x',
             color: 'text-secondary',
             rights: true,
             url: '/journaux/creer',

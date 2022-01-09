@@ -15,7 +15,7 @@ export default {
       {rel: 'icon', type: 'image/x-icon', href: '/lbc-icon.ico'}
     ],
     script: [
-      {src : "https://www.paypal.com/sdk/js?client-id=AXc9bFu6DT80zQE-tuwjPS9U93F81ut0lZQIgNyhxcy52qSynu-ZT1bnTslnllYolzuMHIsVeN7qh5cq&vault=true"},
+      {src: "https://www.paypal.com/sdk/js?client-id=AXc9bFu6DT80zQE-tuwjPS9U93F81ut0lZQIgNyhxcy52qSynu-ZT1bnTslnllYolzuMHIsVeN7qh5cq&vault=true"},
     ]
   },
 
@@ -35,7 +35,8 @@ export default {
     '@nuxtjs/fontawesome',
     '@nuxtjs/google-fonts',
     '@nuxtjs/router-extras',
-    '@nuxtjs/moment'
+    '@nuxtjs/moment',
+    ['@nuxtjs/dotenv', {filename : '.env.dev'} ]
   ],
   fontawesome: {
     icons: {
@@ -76,14 +77,10 @@ export default {
   build: {},
 
   loaders: [
-    { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
+    {test: /\.js$/, exclude: /node_modules/, loader: 'babel'}
   ],
-
-  axios: {
-    baseURL: 'http://localhost:3001/api/v1'
-  },
   moment: {
     defaultLocale: 'fr',
     locales: ['fr']
-  }
+  },
 }

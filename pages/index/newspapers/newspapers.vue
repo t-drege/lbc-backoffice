@@ -4,24 +4,25 @@
     <div id="paypal-button-container"></div>
     <div class="container-fluid mt-4">
       <div class="row justify-content-center">
-        <ImageCard v-for="newspaper in newspapers" :element-id="newspaper.id"
-                   :imageUrl="`http://localhost:3001/images/${newspaper.media.name}`"
-                   :title="`LBC ${newspaper.number}`"
-                   :description="newspaper.principalTheme"
-                   :date="(newspaper.publishedAt) ? $moment(new Date(newspaper.publishedAt).toISOString().slice(0, 19).replace('T', ' ')).format('DD MMMM YYYY') : 'date de publication à venir'"
-                   :icon-buttons="iconButtons"
-                   :newspaper-status="newspaper.newspaperStatus.value"
-                   :newspaper-status-id="newspaper.newspaperStatus.id"
-                   :elements-right="elementsRight"/>
+        <client-only>
+          <ImageCard v-for="newspaper in newspapers" :element-id="newspaper.id"
+                     :imageUrl="`${images}${newspaper.media.name}`"
+                     :title="`LBC ${newspaper.number}`"
+                     :description="newspaper.principalTheme"
+                     :date="(newspaper.publishedAt) ? $moment(new Date(newspaper.publishedAt).toISOString().slice(0, 19).replace('T', ' ')).format('DD MMMM YYYY') : 'date de publication à venir'"
+                     :icon-buttons="iconButtons"
+                     :newspaper-status="newspaper.newspaperStatus.value"
+                     :newspaper-status-id="newspaper.newspaperStatus.id"
+                     :elements-right="elementsRight"
+                     :author="`${newspaper.User.lastname} ${newspaper.User.firstname}`"/>
+        </client-only>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  let Editor;
-  let SourceEditing;
-
   import SubHeaderButtons from "@/components/SubHeader/SubHeaderButtons";
   import ButtonCallModal from "@/components/Button/ButtonCallModal";
   import IconButtonModal from "~/components/Icon/IconButtonModal";
@@ -29,11 +30,10 @@
   import ImageCard from "@/components/Image/ImageCard";
   import IconLink from "@/components/Icon/IconLink";
   import TextInfo from "@/components/Text/TextInfo";
-
+  import axios from "@/plugins/axios";
   /*if (process.browser) {
    Editor = require('@/plugins/ckeditor5/build/ckeditor')
   }*/
-
   export default {
     name: "theme",
     components: {ImageCard, SubHeaderButtons},
@@ -45,6 +45,7 @@
         buttons: [],
         iconButtons: [],
         elementsRight: [],
+        images: (process.client)?process.env.URL_IMAGE:null
       }
     },
     mounted() {
@@ -56,7 +57,7 @@
     methods: {
       getListNewspaper: function () {
         const self = this;
-        this.$axios.get(`/newspapers?page=${this.page}&limit=${this.limit}`).then(function (response) {
+        axios.get(`/newspapers?page=${this.page}&limit=${this.limit}`).then(function (response) {
           self.newspapers = response.data.rows
         })
       },

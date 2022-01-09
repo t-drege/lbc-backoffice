@@ -9,6 +9,9 @@
         <div class="d-flex justify-content-end text-secondary">
           <small>{{date}}</small>
         </div>
+        <div class="d-flex justify-content-end text-dark mb-2 mt-1">
+          <small>{{author}}</small>
+        </div>
         <div class="container-fluid card-footer p-0 bg-white">
           <div class="row">
             <div class="d-flex col-sm-7 ml-1 mt-2">
@@ -53,7 +56,8 @@
       elementsRight: Array,
       rights: Boolean,
       newspaperStatus: String,
-      newspaperStatusId: Number
+      newspaperStatusId: Number,
+      author:String
     }
   }
 </script>

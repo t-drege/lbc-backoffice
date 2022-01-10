@@ -16,7 +16,8 @@ export default {
   name: "SelectForm",
   props: {
     models: Array,
-    defaultValue: Number
+    defaultValue: Number,
+    isRequired:Boolean
   },
   mounted() {
     console.log("sfdsqddfqsfds")

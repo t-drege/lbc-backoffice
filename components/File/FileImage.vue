@@ -22,6 +22,7 @@ export default {
   name: "FileImage",
   props: {
     text: String,
+    isRequired:Boolean
   },
   data() {
     return {

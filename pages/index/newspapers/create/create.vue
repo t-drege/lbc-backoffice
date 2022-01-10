@@ -8,20 +8,20 @@
       <div class="row justify-content-center">
         <form class="w-50" @submit.prevent="validation">
           <div class="form-group">
-            <InputNumber :placeholder="'Numéro du journal (ex: 49)'" :size="'lg'" ref="number-journal"
+            <InputNumber :placeholder="'Numéro du journal (ex: 49)'" :size="'lg'" ref="number"
                          :error="'Veuillez ajouter un numéro au journal'" :is-required="true"/>
           </div>
           <div class="form-group">
-            <InputText :placeholder="'Dossier'" :size="'lg'" ref="name" :is-required="true"/>
+            <InputText :placeholder="'Dossier'" :size="'lg'" :is-required="true" ref="principalTheme"/>
           </div>
           <div class="form-group">
-            <InputText :placeholder="'Nom du dépot de fichier nextcloud (ex : LBC 36)'" :size="'lg'" ref="lastname"
+            <InputText :placeholder="'Nom du dépot de fichier nextcloud (ex : LBC 36)'" :size="'lg'" ref="folderUpload"
                        :is-required="true"/>
           </div>
           <div class="form-group">
-            <SelectForm :default-value="statusSelected" :models="modelSelect"/>
+            <SelectForm :default-value="statusSelected" :models="modelSelect" :is-required="false" ref="newspaperStatusId"/>
           </div>
-          <FileImage :text="'Pas d\'image téléchargée'"/>
+          <FileImage :text="'Pas d\'image téléchargée'" :is-required="false"/>
           <hr>
           <div class="row justify-content-end mr-0 mt-4">
             <button type="submit" @click="createNewspaper" class="btn btn-primary">Enregistrer</button>
@@ -78,13 +78,12 @@ export default {
       axios.get('/newspapers-status').then((result) => this.modelSelect = result.data)
     },
     validation() {
-      console.log(this.$refs)
       if (!CheckElementForm.execute(this.$refs).includes(false)) {
         this.createNewspaper()
       }
     },
     createNewspaper() {
-      this.form.append('number', null)
+      this.form.append('number', this.$refs.number.text)
       axios.post('/newspapers', this.form, {
         headers: {
           'Content-Type': 'multipart/form-data'

@@ -3,7 +3,7 @@
     <SubHeaderButtons :buttonsLeft="buttonsLeft"/>
     <div class="card p-4 mt-4 ju">
       <div class="row justify-content-center">
-      <div class="title-form mb-4 w-75 font-weight-bold">AJOUTER UN JOURNAL</div>
+        <div class="title-form mb-4 w-75 font-weight-bold">AJOUTER UN JOURNAL</div>
       </div>
       <div class="row justify-content-center">
         <form class="w-75">
@@ -20,9 +20,17 @@
             <InputText :placeholder="'Prénom'" :size="'lg'" ref="lastname"/>
           </div>
           <div class="form-group">
-            <InputText :placeholder="'Prénom'" :size="'lg'" ref="lastname"/>
+            <div class="row p-3">
+              <div class="mr-2">
+                <input type="file" name="file" class="form-control col-6" id="file" @change="getFilePath"/>
+              </div>
+              <div></div>
+              <img class="img-thumbnail col-6" :src="image" alt="image-upload"/>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <div class="row justify-content-end mr-0">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
         </form>
       </div>
     </div>
@@ -41,6 +49,8 @@ export default {
   data() {
     return {
       buttonsLeft: [],
+      file: null,
+      image: null
     }
   },
   mounted() {
@@ -55,14 +65,20 @@ export default {
         parameters: null
       }
     })
+  },
+  methods: {
+    getFilePath(event) {
+      this.file = event.target.files[0]
+      this.image = URL.createObjectURL(event.target.files[0])
+    }
   }
 }
 </script>
 
 <style scoped>
-  .title-form {
-    font-size: x-large;
-  }
+.title-form {
+  font-size: x-large;
+}
 </style>
 
 <router>

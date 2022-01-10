@@ -30,6 +30,7 @@
   import TextInfo from "@/components/Text/TextInfo";
   import axios from "@/plugins/axios";
   import ButtonNavigationImage from "../../../components/Button/ButtonNavigationImage";
+  import ButtonNavigation from "@/components/Button/ButtonNavigation";
   /*if (process.browser) {
    Editor = require('@/plugins/ckeditor5/build/ckeditor')
   }*/
@@ -62,27 +63,14 @@
         })
       },
       getSubButtons: function () {
-        this.buttonsLeft.push({
-          component: ButtonNavigationImage,
-          props: {
-            icon: 'arrow-left',
-            size:'fa-2x',
-            color: 'text-secondary',
-            rights: true,
-            url: '/journaux/creer',
-            parameters: null
-          }
-        })
         this.buttonsRight.push(
           {
-            component: ButtonCallModal,
+            component: ButtonNavigation,
             props: {
-              modalId: 'modal-create-newspaper',
-              title: "Ajouter Journal",
-              modalTitle: "Ajouter un journal",
-              modalTarget: Create,
-              modalCancelButton: "Annuler",
-              modalValidationButton: "Ajouter",
+              text: "Ajouter Journal",
+              rights: true,
+              colorBackground: 'bg-primary',
+              url:'/journaux/creer'
             }
           })
       },

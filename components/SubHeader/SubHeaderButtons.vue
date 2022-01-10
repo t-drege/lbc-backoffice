@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid bd-highlight rounded-3 bg-white card p-3">
+  <div class="container-sm bd-highlight rounded-3 bg-white card p-3">
     <div class="row px-2">
       <div class="col-sm-6">
         <div v-for="buttonLeft in buttonsLeft">

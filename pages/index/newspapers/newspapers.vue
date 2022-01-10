@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <SubHeaderButtons :buttonsRight="buttonsRight"/>
-    <div class="container mt-4">
-      <div class="row justify-content-start px-5">
+    <div class="container card py-3 mt-4">
+      <div class="row justify-content-center">
         <client-only>
           <ImageCard class="col-sm-auto" v-for="newspaper in newspapers" :element-id="newspaper.id"
                      :imageUrl="(newspapers.media) ? `${images}${newspaper.media.name}` : require('@/static/no-image.png')"
@@ -130,7 +130,9 @@
 </script>
 
 <style scoped>
-
+  .content {
+    width: 50%;
+  }
 </style>
 
 <router>

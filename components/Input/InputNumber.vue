@@ -1,25 +1,29 @@
 <template>
   <div>
-    <b-form-input :type="'number'" min="0" class="rounded-right"
+    <b-form-input :type="'number'"
+                  min="1"
+                  class="rounded-right"
                   v-model="text"
                   :state="valid"
                   :placeholder="placeholder"
                   :name="text"
-                  :size="size"
-                  :required="true"/>
+                  :size="size"/>
     <b-form-invalid-feedback :state="valid">
-      <p class="ml-1 mt-1 font-weight-bold error-email">Email non valide</p>
+      <p class="ml-1 mt-1 font-weight-bold error-email">{{ error }}</p>
     </b-form-invalid-feedback>
   </div>
 </template>
 
 <script>
+import CheckElementForm from "@/utils/CheckElementForm";
+
 export default {
   name: "InputNumber",
   props: {
     placeholder: String,
     isRequired: Boolean,
-    size: Number
+    size: Number,
+    error: String
   },
   data() {
     return {
@@ -28,8 +32,12 @@ export default {
     }
   },
   methods: {
-    isValid: function () {
-
+    isValid() {
+      if (this.text != null && this.text !== "") {
+        this.valid = true
+      } else {
+        this.valid = false
+      }
     }
   }
 }

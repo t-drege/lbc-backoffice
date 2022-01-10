@@ -7,7 +7,7 @@
                   :name="text"
                   :size="size"/>
     <b-form-invalid-feedback :state="valid">
-      <p class="ml-1 mt-1 font-weight-bold error-email">Email non valide</p>
+      <p class="ml-1 mt-1 font-weight-bold error-email">{{error}}</p>
     </b-form-invalid-feedback>
   </div>
 </template>
@@ -18,7 +18,8 @@
     props: {
       placeholder: String,
       isRequired: Boolean,
-      size: Number
+      size: Number,
+      error:String
     },
     data() {
       return {

@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <client-only>
           <ImageCard class="col-sm-auto" v-for="newspaper in newspapers" :element-id="newspaper.id"
-                     :imageUrl="(newspapers.media) ? `${images}${newspaper.media.name}` : require('@/static/no-image.png')"
+                     :imageUrl="(newspaper.media) ? `${images}${newspaper.media.name}` : require('@/static/no-image.png')"
                      :title="`LBC ${newspaper.number}`"
                      :description="newspaper.principalTheme"
                      :date="(newspaper.publishedAt) ? $moment(new Date(newspaper.publishedAt).toISOString().slice(0, 19).replace('T', ' ')).format('DD MMMM YYYY') : 'date de publication à venir'"

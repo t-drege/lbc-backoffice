@@ -36,6 +36,7 @@ export default {
     '@nuxtjs/google-fonts',
     '@nuxtjs/router-extras',
     '@nuxtjs/moment',
+    '@nuxt/image',
     ['@nuxtjs/dotenv', {filename : '.env.dev'} ]
   ],
   fontawesome: {
@@ -61,7 +62,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxt/image',
   ],
 
   bootstrapVue: {

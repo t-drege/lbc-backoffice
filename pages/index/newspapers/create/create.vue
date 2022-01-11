@@ -12,10 +12,14 @@
                          :error="'Veuillez ajouter un numéro au journal'" :is-required="true"/>
           </div>
           <div class="form-group">
-            <InputText :placeholder="'Dossier'" :size="'lg'" :is-required="true" ref="principalTheme"/>
+            <InputText :placeholder="'Dossier ou thème principal (ex: Jeanne D\'Arc)'"
+                       :error="'Ajouter le dossier ou le theme principal de ce journal'" :size="'lg'"
+                       :is-required="true" ref="principalTheme"/>
           </div>
           <div class="form-group">
-            <InputText :placeholder="'Nom du dépot de fichier nextcloud (ex : LBC 36)'" :size="'lg'" ref="folderUpload"
+            <InputText :placeholder="'Nom du dépot de fichier nextcloud (ex : LBC 36)'"
+                       :error="'Ajouter un nom de dépot de fichier pour l\'envoi des articles'" :size="'lg'"
+                       ref="folderUpload"
                        :is-required="true"/>
           </div>
           <div class="form-group">
@@ -78,13 +82,11 @@ export default {
       axios.get('/newspapers-status').then((result) => this.modelSelect = result.data)
     },
     validation() {
-      console.log( this.$refs.newspaperStatusId)
       if (!CheckElementForm.execute(this.$refs).includes(false)) {
         this.createNewspaper()
       }
     },
     createNewspaper() {
-
       const form = new FormData()
       form.append('number', this.$refs.number.text)
       form.append('principalTheme', this.$refs.principalTheme.text)
@@ -95,6 +97,9 @@ export default {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
+      }).then((response) => this.$router.push({name: 'index-newspapers-id', params: {id: response.data.id, newspaper: response.data}}))
+        .catch(function (error) {
+        //this.$route.push({name: 'newspaper/create'})
       })
     }
   }

@@ -7,38 +7,40 @@
                   :name="text"
                   :size="size"/>
     <b-form-invalid-feedback :state="valid">
-      <p class="ml-1 mt-1 font-weight-bold error-email">{{error}}</p>
+      <p class="error-message-feedback ml-1 mt-1 font-weight-bold">{{ error }}</p>
     </b-form-invalid-feedback>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "InputText",
-    props: {
-      placeholder: String,
-      isRequired: Boolean,
-      size: Number,
-      error:String
-    },
-    data() {
-      return {
-        text: "",
-        valid: null,
-      }
-    },
-    methods: {
-      isValid: function () {
-        if (this.text != null && this.text !== "") {
-          this.valid = true
-        } else {
-          this.valid = false
-        }
+export default {
+  name: "InputText",
+  props: {
+    placeholder: String,
+    isRequired: Boolean,
+    size: Number,
+    error: String
+  },
+  data() {
+    return {
+      text: "",
+      valid: null,
+    }
+  },
+  methods: {
+    isValid: function () {
+      if (this.text != null && this.text !== "") {
+        this.valid = true
+      } else {
+        this.valid = false
       }
     }
   }
+}
 </script>
 
 <style scoped>
-
+.error-message-feedback {
+  font-size: medium !important;
+}
 </style>

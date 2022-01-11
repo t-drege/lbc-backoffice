@@ -65,7 +65,7 @@
 <style scoped>
 
   .card-size {
-    width: 280px;
+    width: 300px;
   }
 
   .card-size-image {

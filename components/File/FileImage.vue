@@ -1,5 +1,9 @@
 <template>
   <div class="p-0">
+    <a class="btn btn-success" href="#">
+      <font-awesome-icon :icon="'photo-video'" class="mx-1"/>
+      Medias
+    </a>
     <b-button class="btn btn-primary d-inline" @click="$refs.file.click()" v-text="'Télécharger'">
       <input hidden type="file" name="file" class="form-control" ref="file" @change="getFilePath"/>
     </b-button>
@@ -22,12 +26,12 @@ export default {
   name: "FileImage",
   props: {
     text: String,
-    isRequired:Boolean
+    isRequired: Boolean
   },
   data() {
     return {
       image: null,
-      file:null
+      file: null
     }
   },
   methods: {

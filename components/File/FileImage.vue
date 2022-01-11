@@ -11,7 +11,7 @@
         {{ text }}
       </div>
     </div>
-    <div v-if="image != null">
+    <div class="content-img" v-if="image != null">
       <img class="img-thumbnail my-3" :src="image" alt="image-upload"/>
     </div>
   </div>
@@ -26,7 +26,8 @@ export default {
   },
   data() {
     return {
-      image: null
+      image: null,
+      file:null
     }
   },
   methods: {
@@ -36,11 +37,16 @@ export default {
     },
     removeFile() {
       this.image = null
+    },
+    isValid() {
+
     }
   }
 }
 </script>
 
 <style scoped>
-
+.content-img {
+  max-width: 300px;
+}
 </style>

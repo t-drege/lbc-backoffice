@@ -1,7 +1,7 @@
 <template>
   <b-form-select class="form-select"
                  :size="'lg'"
-                 v-model="defaultValue">
+                 v-model="value">
     <b-select-option
       :value="model.id"
       v-bind:key="model.id"
@@ -16,7 +16,7 @@ export default {
   name: "SelectForm",
   props: {
     models: Array,
-    defaultValue: Number,
+    value: Number,
     isRequired:Boolean
   },
   mounted() {

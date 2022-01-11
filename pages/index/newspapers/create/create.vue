@@ -19,12 +19,13 @@
                        :is-required="true"/>
           </div>
           <div class="form-group">
-            <SelectForm :default-value="statusSelected" :models="modelSelect" :is-required="false" ref="newspaperStatusId"/>
+            <SelectForm :value="statusSelected" :models="modelSelect" :is-required="false"
+                        ref="newspaperStatusId"/>
           </div>
-          <FileImage :text="'Pas d\'image téléchargée'" :is-required="false"/>
+          <FileImage :text="'Pas d\'image téléchargée'" :is-required="false" ref="file"/>
           <hr>
           <div class="row justify-content-end mr-0 mt-4">
-            <button type="submit" @click="createNewspaper" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
           </div>
         </form>
       </div>
@@ -53,7 +54,6 @@ export default {
       image: null,
       modelSelect: [],
       statusSelected: NOT_BEGINNING_STATUS,
-      form: new FormData()
     }
   },
   mounted() {
@@ -78,13 +78,20 @@ export default {
       axios.get('/newspapers-status').then((result) => this.modelSelect = result.data)
     },
     validation() {
+      console.log( this.$refs.newspaperStatusId)
       if (!CheckElementForm.execute(this.$refs).includes(false)) {
         this.createNewspaper()
       }
     },
     createNewspaper() {
-      this.form.append('number', this.$refs.number.text)
-      axios.post('/newspapers', this.form, {
+
+      const form = new FormData()
+      form.append('number', this.$refs.number.text)
+      form.append('principalTheme', this.$refs.principalTheme.text)
+      form.append('folderUpload', this.$refs.folderUpload.text)
+      form.append('newspaperStatusId', this.$refs.newspaperStatusId.value)
+      form.append('file', this.$refs.file.file)
+      axios.post('/newspapers', form, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
